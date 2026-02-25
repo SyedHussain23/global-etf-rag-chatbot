@@ -1,42 +1,46 @@
 # 🌍 Global ETF Intelligence Chatbot (RAG)
 
-## 📌 Overview
+An end-to-end **Retrieval-Augmented Generation (RAG)** chatbot that answers ETF-related questions using document-grounded responses.
 
-The **Global ETF Intelligence Chatbot** is an end-to-end Retrieval-Augmented Generation (RAG) AI application that enables users to ask questions about Exchange Traded Funds (ETFs) and receive context-aware answers grounded in ETF documents.
+The system retrieves relevant information from ETF documents stored in a vector database and generates accurate answers using an LLM.
 
-The system retrieves relevant information from ETF PDFs and text files using a vector database and generates responses using an LLM.
-
-⚠️ **Educational use only — no investment advice provided**
+⚠️ This project is **educational and research focused** and does not provide financial advice.
 
 ---
 
-## 🎯 Problem Statement
+## 🚀 Project Overview
 
-ETF documentation is often lengthy and difficult for beginners to interpret.
-Users need a way to quickly extract accurate information without manually reading multiple documents.
+ETF documents are often lengthy and difficult to navigate.
 
----
+This project solves that problem by building an AI assistant that:
 
-## ✅ Solution
-
-This project builds a RAG chatbot that:
-
-* Loads ETF knowledge from PDFs and text files
-* Splits content into semantic chunks
-* Converts text into embeddings
-* Stores embeddings in a Chroma vector database
-* Retrieves relevant content for user queries
-* Generates answers using an LLM grounded in documents only
+* Reads ETF PDFs and text documents
+* Converts them into embeddings
+* Stores them in a vector database
+* Retrieves relevant context when a user asks questions
+* Generates answers strictly based on documents
 
 ---
 
-## 🧠 RAG Architecture (Simplified)
+## 🎯 Key Features
 
-1. Document ingestion & chunking
-2. Embedding generation
-3. Vector storage (Chroma DB)
-4. Retrieval of relevant context
-5. LLM answer generation
+✅ Document-grounded answers (no hallucination style responses)
+✅ Vector database retrieval (Chroma)
+✅ Streamlit chatbot UI
+✅ LangChain RetrievalQA pipeline
+✅ Secure environment variable usage
+✅ Financial disclaimer enforcement
+✅ Modular architecture (ingest → retrieve → chat)
+
+---
+
+## 🧠 RAG Pipeline (Simple)
+
+1. Documents are loaded and chunked
+2. Chunks are converted into embeddings
+3. Embeddings stored in Chroma vector DB
+4. User query retrieves relevant chunks
+5. LLM generates contextual answer
 
 ---
 
@@ -47,7 +51,8 @@ This project builds a RAG chatbot that:
 * OpenAI API
 * Chroma Vector Database
 * Streamlit
-* PyPDF Loader
+* PyPDFLoader
+* RecursiveCharacterTextSplitter
 * dotenv
 
 ---
@@ -55,7 +60,7 @@ This project builds a RAG chatbot that:
 ## 📁 Project Structure
 
 ```
-global-etf-chatbot/
+global-etf-rag-chatbot/
 │
 ├── data/
 │   ├── etf_basics.pdf
@@ -67,9 +72,9 @@ global-etf-chatbot/
 ├── chat.py
 ├── app.py
 ├── chroma_db/
-├── .env
+├── .env.example
 ├── requirements.txt
-└── README.md
+├── README.md
 ```
 
 ---
@@ -79,21 +84,16 @@ global-etf-chatbot/
 ### 1️⃣ Clone repository
 
 ```bash
-git clone https://github.com/SyedHussain23/global-etf-chatbot.git
-cd global-etf-chatbot
+git clone https://github.com/SyedHussain23/global-etf-rag-chatbot.git
+cd global-etf-rag-chatbot
 ```
-
----
 
 ### 2️⃣ Create virtual environment
 
 ```bash
 python -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate      # Windows
+source venv/bin/activate
 ```
-
----
 
 ### 3️⃣ Install dependencies
 
@@ -103,7 +103,7 @@ pip install -r requirements.txt
 
 ---
 
-### 4️⃣ Add environment variables
+## 🔐 Environment Variables
 
 Create `.env`
 
@@ -113,78 +113,79 @@ OPENAI_API_KEY=your_api_key_here
 
 ---
 
-### 5️⃣ Ingest documents (run once)
+## 📦 Ingest Documents (run once)
 
 ```bash
 python ingest.py
 ```
 
-This creates the vector database.
+This step:
+
+* Loads ETF documents
+* Splits into chunks
+* Creates embeddings
+* Stores in Chroma DB
 
 ---
 
-### 6️⃣ Run chatbot
+## 💬 Run Chatbot
 
 ```bash
 streamlit run app.py
 ```
 
----
-
-## 💬 Example Queries
-
-* What are ETFs?
-* Difference between S&P 500 ETF and Nasdaq ETF
-* Benefits and risks of ETFs
-* How ETFs track indices
+Then open browser → `http://localhost:8501`
 
 ---
 
-## 🔐 Safety & Guardrails
+## 📊 Example Use Cases
 
-* Responses restricted to ETF documents
-* No financial advice generated
-* Explicit disclaimer included
-* Document-grounded answers only
-
----
-
-## 📊 Key Features
-
-✅ RAG architecture
-✅ Vector database retrieval
-✅ Context-aware responses
-✅ Document grounding
-✅ Streamlit UI
-✅ Modular ingestion pipeline
-✅ Production-ready structure
+* ETF fundamentals Q&A
+* Portfolio research assistant
+* Educational ETF exploration
+* Document-aware financial chatbot prototype
 
 ---
 
-## 🚀 Future Improvements
+## ⚠️ Disclaimer
 
-* Hybrid retrieval (BM25 + vector search)
-* Metadata filtering
-* Source citation in answers
-* Streaming responses
-* Multi-document ranking
-* Deployment on cloud (Streamlit Cloud / AWS)
-* Authentication layer
-* Feedback loop for answer quality
+This project is intended for **educational and research purposes only**.
+
+* No financial advice
+* No investment recommendation
+* Answers are document-grounded
+* Users must conduct independent research
 
 ---
 
-## 📌 Author
+## 🔮 Future Improvements
+
+* Hybrid search (BM25 + vector)
+* Multi-document reasoning
+* Guardrails for financial compliance
+* Conversation memory
+* Evaluation pipeline
+* UI improvements
+* Cloud deployment
+
+---
+
+## 👨‍💻 Author
 
 **Syed Hussain Abdul Hakeem**
-AI Engineer
 
-GitHub: [https://github.com/SyedHussain23](https://github.com/SyedHussain23)
+LinkedIn:
+[https://www.linkedin.com/in/syed-hussain-abdul-hakeem](https://www.linkedin.com/in/syed-hussain-abdul-hakeem)
 
-LinkedIn: https://www.linkedin.com/in/syed-hussain-abdul-hakeem
+GitHub:
+[https://github.com/SyedHussain23](https://github.com/SyedHussain23)
 
 ---
 
 ## ⭐ Support
 
-If you found this project helpful, consider giving it a ⭐
+If you found this project useful:
+
+👉 Give the repository a star
+👉 Share feedback
+👉 Connect on LinkedIn
